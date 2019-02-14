@@ -53,7 +53,7 @@ def getItem():
 		print(e.inventory)
 
 
-getItem()
+# getItem()
 
 # Write a loop that:
 
@@ -62,10 +62,10 @@ print(f"{e.name}'s location is {e.room}")
 
 items = sorted(room[e.room].items)
 
-for i in items:
-	print(i.name)
+# for i in items:
+#     print(i.name)
 
-print(f"{e.name}'s location is {items}")
+# print(f"{e.name}'s location is {items}")
 
 # * Prints the current description (the textwrap module might be useful here).
 for i in room:
@@ -86,9 +86,9 @@ def game():
 
 		dir = input(">> ")
 
-		# count the arguments
+		# count the arguments & start at items to use args as items
 		args = dir.split()[1:]
-		numargs = len(args + 1)
+		numargs = len(args) + 1
 		print(f"There are {numargs} args.")
 
 	# If the user enters a cardinal direction, attempt to move to the room there.
@@ -101,8 +101,9 @@ def game():
 					room[e.room].n_to.name
 					room[e.room] = room[e.room].n_to
 					items = sorted(room[e.room].items)
+					print(f"{room[e.room].prompt}")
 					for i in items:
-						print(f" You see a {i.name} in the room")
+						print(f"You see a {i.name} in the room")
 					break
 				except AttributeError:
 					print(f"dir is {dir}")
@@ -116,6 +117,7 @@ def game():
 					room[e.room].s_to.name
 					room[e.room] = room[e.room].s_to
 					items = sorted(room[e.room].items)
+					print(f"{room[e.room].prompt}")
 					for i in items:
 						print(f" You see a {i.name} in the room")
 					break
@@ -131,6 +133,7 @@ def game():
 					room[e.room].e_to.name
 					room[e.room] = room[e.room].e_to
 					items = sorted(room[e.room].items)
+					print(f"{room[e.room].prompt}")
 					for i in items:
 						print(f" You see a {i.name} in the room")
 					break
@@ -146,6 +149,7 @@ def game():
 					room[e.room].w_to.name
 					room[e.room] = room[e.room].w_to
 					items = sorted(room[e.room].items)
+					print(f"{room[e.room].prompt}")
 					for i in items:
 						print(f" You see a {i.name} in the room")
 					break
@@ -160,6 +164,28 @@ def game():
 			print("Goodbye")
 			# print(f"{e.name}'s location is: {e.room.name}")
 			break
+
+		elif dir.startswith("get "):
+			items = sorted(room[e.room].items)
+			print(f"the number of items you are trying to get is {numargs}")
+			if int(numargs) > 2:
+				error = "You may only get 1 item at a time."
+				print(error)
+			else:
+				item = args[0]
+				for i in items:
+					if str(i.name) == str(item):
+						print(f"Your inventory is: {e.inventory}")
+						print(f"you picked up {item}")
+						e.inventory.append(item)
+						print(f"Your inventory is now: {e.inventory}")
+					else:
+						print(f"{item} is not in the room")
+				pass
+				# iNames = [x.name for x in p.room.inv]
+				# itemIndex = iNames.index(items[0])
+				# p.get(p.room.inv[itemIndex])
+				# p.room.drop(itemIndex)
 
 
 if __name__ == '__main__':
