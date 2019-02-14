@@ -1,7 +1,7 @@
 # Implement a class to hold room information. This should have name and
 # description attributes.
 
-class Room: 
+class Room:
 	def __init__(self, name, prompt, items):
 		self.name = name
 		self.prompt = prompt

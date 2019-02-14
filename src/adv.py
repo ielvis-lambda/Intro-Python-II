@@ -5,7 +5,7 @@ from player import Player
 # Declare all the rooms
 room = {
 	'outside':  Room("Outside Cave Entrance",
-					 "North of you, the cave mount beckons",[Item("Stick", "a dirty stick")]),
+					 "North of you, the cave mount beckons", [Item("Stick", "a dirty stick")]),
 
 	'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east.""", [Item("Rope", "a long rope")]),
@@ -41,6 +41,20 @@ room['treasure'].s_to = room['narrow']
 # Make a new player object that is currently in the 'outside' room.
 e = Player("Elvis", "outside")
 
+# print(room[e.room].s_to)
+# print([k for k, v in room.items() if v == "Outside Cave Entrance"])
+
+# print(room[e.room].name)
+
+oce = room[e.room].name
+
+# for r in room:
+#     print(room.get(r).name)
+#     if room.get(r).name == oce:
+#         print(f"this one is equal! {room.get(r).name}")
+#     else:
+#         print("no match")
+
 # Write a loop that:
 #
 # * Prints the current room name
@@ -54,36 +68,89 @@ for i in room:
 # * Waits for user input and decides what to do.
 
 # passing in the direction
-# while True: 
-
-	dir = input(">> ")
-
-# If the user enters a cardinal direction, attempt to move to the room there.
-	if dir == 'n':
-		print(e.room)
-		print(room[e.room].n_to.name)
-
-		e.room = room[e.room].n_to.name
-
-		print(f"{e.name}'s location is: {e.room}")
 
 
-	elif dir == 's':
-		e.room == room['{e.room}'].s
-	elif dir == 'w':
-		e.room == room['{e.room}'].e
-	elif dir == 'e':
-		e.room == room['{e.room}'].w
-# Print an error message if the movement isn't allowed.
-# print(f"{e.name} is {e.room}")
-# If the user enters "q", quit the game.
+def game():
 
-# print(f"{room['outside'].n_to}")
+	print("Move! Enter 'n', 's', 'e' or 'w' to move. 'q' to quit.")
 
-# a = "fish"
+	while True:
 
-# print(a)
+		dir = input(">> ")
 
-# print(room["foyer"].name)
+	# If the user enters a cardinal direction, attempt to move to the room there.
 
-# print(room['outside'].n_to.name)
+		if dir == 'n':				
+			print(room[e.room].name)
+			for r in room:
+				# print(room.get(r).name)
+				try:
+					room[e.room].n_to.name
+					print(f"this one is equal! {room.get(r).name}")
+					room[e.room] = room[e.room].n_to
+					print(f"{e.name}'s location is: {room[e.room].name}")
+					break
+				except AttributeError:
+					print(f"dir is {dir}")
+					print("A strong force blocks your path")
+					# print(f"{e.name}'s location is: {e.room.name}")
+					break
+		elif dir == 's':				
+			print(room[e.room].name)
+			for r in room:
+				# print(room.get(r).name)
+				try:
+					room[e.room].s_to.name
+					print(f"this one is equal! {room.get(r).name}")
+					room[e.room] = room[e.room].s_to
+					print(f"{e.name}'s location is: {room[e.room].name}")
+					break
+				except AttributeError:
+					print(f"dir is {dir}")
+					print("A strong force blocks your path")
+					# print(f"{e.name}'s location is: {e.room.name}")
+					break		
+		elif dir == 'e':				
+			print(room[e.room].name)
+			for r in room:
+				# print(room.get(r).name)
+				try:
+					room[e.room].e_to.name
+					print(f"this one is equal! {room.get(r).name}")
+					room[e.room] = room[e.room].e_to
+					print(f"{e.name}'s location is: {room[e.room].name}")
+					break
+				except AttributeError:
+					print(f"dir is {dir}")
+					print("A strong force blocks your path")
+					# print(f"{e.name}'s location is: {e.room.name}")
+					break	
+		elif dir == 'w':				
+			print(room[e.room].name)
+			for r in room:
+				# print(room.get(r).name)
+				try:
+					room[e.room].w_to.name
+					print(f"this one is equal! {room.get(r).name}")
+					room[e.room] = room[e.room].w_to
+					print(f"{e.name}'s location is: {room[e.room].name}")
+					break
+				except AttributeError:
+					print(f"dir is {dir}")
+					print("A strong force blocks your path")
+					# print(f"{e.name}'s location is: {e.room.name}")
+					break	
+
+	# If the user enters "q", quit the game.
+
+	# print(f"{room['outside'].n_to}")
+
+	# a = "fish"
+
+	# print(a)
+
+	# print(room["foyer"].name)
+
+	# print(room['outside'].n_to.name)
+if __name__ == '__main__':
+	game()
