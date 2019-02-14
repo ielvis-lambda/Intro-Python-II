@@ -59,6 +59,13 @@ oce = room[e.room].name
 #
 # * Prints the current room name
 print(f"{e.name}'s location is {e.room}")
+
+items = sorted(room[e.room].items)
+
+for i in items: 
+	print(i.name)
+
+print(f"{e.name}'s location is {items}")
 # * Prints the current description (the textwrap module might be useful here).
 for i in room:
 	# print(e.room)
@@ -86,14 +93,14 @@ def game():
 				# print(room.get(r).name)
 				try:
 					room[e.room].n_to.name
-					print(f"this one is equal! {room.get(r).name}")
-					room[e.room] = room[e.room].n_to
-					print(f"{e.name}'s location is: {room[e.room].name}")
+					room[e.room] = room[e.room].n_to	
+					items = sorted(room[e.room].items)
+					for i in items: 
+						print(f" You see a {i.name} in the room")
 					break
 				except AttributeError:
 					print(f"dir is {dir}")
 					print("A strong force blocks your path")
-					# print(f"{e.name}'s location is: {e.room.name}")
 					break
 		elif dir == 's':				
 			print(room[e.room].name)
@@ -101,56 +108,53 @@ def game():
 				# print(room.get(r).name)
 				try:
 					room[e.room].s_to.name
-					print(f"this one is equal! {room.get(r).name}")
-					room[e.room] = room[e.room].s_to
-					print(f"{e.name}'s location is: {room[e.room].name}")
+					room[e.room] = room[e.room].s_to	
+					items = sorted(room[e.room].items)
+					for i in items: 
+						print(f" You see a {i.name} in the room")
 					break
 				except AttributeError:
 					print(f"dir is {dir}")
 					print("A strong force blocks your path")
-					# print(f"{e.name}'s location is: {e.room.name}")
-					break		
+					break	
 		elif dir == 'e':				
 			print(room[e.room].name)
 			for r in room:
 				# print(room.get(r).name)
 				try:
 					room[e.room].e_to.name
-					print(f"this one is equal! {room.get(r).name}")
-					room[e.room] = room[e.room].e_to
-					print(f"{e.name}'s location is: {room[e.room].name}")
+					room[e.room] = room[e.room].e_to	
+					items = sorted(room[e.room].items)
+					for i in items: 
+						print(f" You see a {i.name} in the room")
 					break
 				except AttributeError:
 					print(f"dir is {dir}")
 					print("A strong force blocks your path")
-					# print(f"{e.name}'s location is: {e.room.name}")
-					break	
-		elif dir == 'w':				
+					break
+		if dir == 'w':				
 			print(room[e.room].name)
 			for r in room:
 				# print(room.get(r).name)
 				try:
 					room[e.room].w_to.name
-					print(f"this one is equal! {room.get(r).name}")
-					room[e.room] = room[e.room].w_to
-					print(f"{e.name}'s location is: {room[e.room].name}")
+					room[e.room] = room[e.room].w_to	
+					items = sorted(room[e.room].items)
+					for i in items: 
+						print(f" You see a {i.name} in the room")
 					break
 				except AttributeError:
 					print(f"dir is {dir}")
 					print("A strong force blocks your path")
-					# print(f"{e.name}'s location is: {e.room.name}")
-					break	
+					break
 
 	# If the user enters "q", quit the game.
 
-	# print(f"{room['outside'].n_to}")
+		elif dir == 'q':				
+				print("Goodbye")
+				# print(f"{e.name}'s location is: {e.room.name}")
+				break	
 
-	# a = "fish"
 
-	# print(a)
-
-	# print(room["foyer"].name)
-
-	# print(room['outside'].n_to.name)
 if __name__ == '__main__':
 	game()
