@@ -89,7 +89,6 @@ def game():
 		# count the arguments & start at items to use args as items
 		args = dir.split()[1:]
 		numargs = len(args) + 1
-		print(f"There are {numargs} args.")
 
 	# If the user enters a cardinal direction, attempt to move to the room there.
 
@@ -177,15 +176,61 @@ def game():
 					if str(i.name) == str(item):
 						print(f"Your inventory is: {e.inventory}")
 						print(f"you picked up {item}")
-						e.inventory.append(item)
+						e.inventory.append(Item(i.name, i.description))
 						print(f"Your inventory is now: {e.inventory}")
+						for i in room[e.room].items:
+							print(i.name)
+							for item in room[e.room].items:
+								print(f"item in room is {item.name}")
+								if str(i.name) == str(item.name):
+									print(
+										f"The items in the room are: {room[e.room].items}")
+									room[e.room].items.remove(item)
+									print(
+										f"The items in the room are now: {room[e.room].items}")
+									item.on_take()
 					else:
 						print(f"{item} is not in the room")
-				pass
-				# iNames = [x.name for x in p.room.inv]
-				# itemIndex = iNames.index(items[0])
-				# p.get(p.room.inv[itemIndex])
-				# p.room.drop(itemIndex)
+						pass
+
+		elif dir == "i":
+			if len(e.inventory) < 1:
+				print("Your inventory is empty")
+			else:
+				print("You have the following items in your inventory:")
+				for i in e.inventory:
+					print(i.name)
+
+
+		elif dir.startswith("drop "):
+			items = sorted(e.inventory)
+			print(f"the number of items you are trying to drop is {numargs}")
+			if int(numargs) > 2:
+				error = "You may only drop 1 item at a time."
+				print(error)
+			else:
+				item = args[0]
+				for i in items:
+					if str(i.name) == str(item):
+						print(f"Your inventory is: {e.inventory}")
+						print(f"you dropped {item}")
+						e.inventory.remove(item)
+						print(f"Your inventory is now: {e.inventory}")
+						for i in room[e.room].items:
+							print(i.name)
+							for item in room[e.room].items:
+								print(f"item in room is {item.name}")
+								if str(i.name) == str(item.name):
+									print(
+										f"The items in the room are: {room[e.room].items}")
+									room[e.room].items.append(item)
+									print(
+										f"The items in the room are now: {room[e.room].items}")
+									item.on_take()
+					else:
+						print(f"{item} is not in your inventory")
+						pass
+
 
 
 if __name__ == '__main__':
