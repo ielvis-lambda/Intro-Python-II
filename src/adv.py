@@ -39,33 +39,34 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-e = Player("Elvis", "outside")
+e = Player("Elvis", "outside", [])
 
-# print(room[e.room].s_to)
-# print([k for k, v in room.items() if v == "Outside Cave Entrance"])
+# Inventory Testing
 
-# print(room[e.room].name)
 
-oce = room[e.room].name
+def getItem():
+	items = sorted(room[e.room].items)
+	print(e.inventory)
+	for i in items:
+		print(i.name)
+		e.inventory.append(i.name)
+		print(e.inventory)
 
-# for r in room:
-#     print(room.get(r).name)
-#     if room.get(r).name == oce:
-#         print(f"this one is equal! {room.get(r).name}")
-#     else:
-#         print("no match")
+
+getItem()
 
 # Write a loop that:
-#
+
 # * Prints the current room name
 print(f"{e.name}'s location is {e.room}")
 
 items = sorted(room[e.room].items)
 
-for i in items: 
+for i in items:
 	print(i.name)
 
 print(f"{e.name}'s location is {items}")
+
 # * Prints the current description (the textwrap module might be useful here).
 for i in room:
 	# print(e.room)
@@ -74,8 +75,8 @@ for i in room:
 		print(room[i].prompt)
 # * Waits for user input and decides what to do.
 
-# passing in the direction
 
+# passing in the direction
 
 def game():
 
@@ -85,62 +86,67 @@ def game():
 
 		dir = input(">> ")
 
+		# count the arguments
+		args = dir.split()[1:]
+		numargs = len(args + 1)
+		print(f"There are {numargs} args.")
+
 	# If the user enters a cardinal direction, attempt to move to the room there.
 
-		if dir == 'n':				
+		if dir == 'n':
 			print(room[e.room].name)
 			for r in room:
 				# print(room.get(r).name)
 				try:
 					room[e.room].n_to.name
-					room[e.room] = room[e.room].n_to	
+					room[e.room] = room[e.room].n_to
 					items = sorted(room[e.room].items)
-					for i in items: 
+					for i in items:
 						print(f" You see a {i.name} in the room")
 					break
 				except AttributeError:
 					print(f"dir is {dir}")
 					print("A strong force blocks your path")
 					break
-		elif dir == 's':				
+		elif dir == 's':
 			print(room[e.room].name)
 			for r in room:
 				# print(room.get(r).name)
 				try:
 					room[e.room].s_to.name
-					room[e.room] = room[e.room].s_to	
+					room[e.room] = room[e.room].s_to
 					items = sorted(room[e.room].items)
-					for i in items: 
+					for i in items:
 						print(f" You see a {i.name} in the room")
 					break
 				except AttributeError:
 					print(f"dir is {dir}")
 					print("A strong force blocks your path")
-					break	
-		elif dir == 'e':				
+					break
+		elif dir == 'e':
 			print(room[e.room].name)
 			for r in room:
 				# print(room.get(r).name)
 				try:
 					room[e.room].e_to.name
-					room[e.room] = room[e.room].e_to	
+					room[e.room] = room[e.room].e_to
 					items = sorted(room[e.room].items)
-					for i in items: 
+					for i in items:
 						print(f" You see a {i.name} in the room")
 					break
 				except AttributeError:
 					print(f"dir is {dir}")
 					print("A strong force blocks your path")
 					break
-		if dir == 'w':				
+		if dir == 'w':
 			print(room[e.room].name)
 			for r in room:
 				# print(room.get(r).name)
 				try:
 					room[e.room].w_to.name
-					room[e.room] = room[e.room].w_to	
+					room[e.room] = room[e.room].w_to
 					items = sorted(room[e.room].items)
-					for i in items: 
+					for i in items:
 						print(f" You see a {i.name} in the room")
 					break
 				except AttributeError:
@@ -150,10 +156,10 @@ def game():
 
 	# If the user enters "q", quit the game.
 
-		elif dir == 'q':				
-				print("Goodbye")
-				# print(f"{e.name}'s location is: {e.room.name}")
-				break	
+		elif dir == 'q':
+			print("Goodbye")
+			# print(f"{e.name}'s location is: {e.room.name}")
+			break
 
 
 if __name__ == '__main__':
